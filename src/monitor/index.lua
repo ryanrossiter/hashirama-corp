@@ -1,10 +1,19 @@
 SIDES = {"front", "back", "left", "right", "top", "bottom"}
 
+monitor = nil
 for i,side in ipairs(SIDES) do
   local present = peripheral.isPresent(side)
-  if present then
-    print("Found peripheral "..peripheral.getType(side).." on side "..side)
+  if present && peripheral.getType(side) == "monitor" then
+    print("Found monitor on side "..side)
+    monitor = peripheral.wrap(side)
   end
 end
 
-peripheral.call( "left", "write", "Hello World!" )
+-- monitor.write( "Hello World!" )
+
+local oldterm = term.redirect(monitor)
+-- Now all term calls will go to the monitor instead
+local image = paintutils.loadImage("happy.png")
+paintutils.loadImage(image, 1, 1)
+term.redirect( oldterm )
+-- Now the term.* calls will draw on the terminal again
