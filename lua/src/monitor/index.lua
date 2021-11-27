@@ -1,25 +1,23 @@
-SIDES = {"front", "back", "left", "right", "top", "bottom"}
+-- SIDES = {"front", "back", "left", "right", "top", "bottom"}
 
 monitor = nil
-for i,side in ipairs(SIDES) do
-  local present = peripheral.isPresent(side)
-  if present then
-    local type = peripheral.getType(side)
-    if type == "monitor" then
-      print("Found monitor on side "..side)
-      monitor = peripheral.wrap(side)
-    elseif type == "modem" then
-      print("Found modem on side "..side)
-      local modem = peripheral.wrap(side)
-      for i,name in ipairs(model.getNamesRemote()) do
-        local rtype = modem.getTypeRemote(name)
-        if rtype == "monitor" then
-          print("Found monitor on modem "..name)
-          monitor = peripheral.wrap(side)
-        end
-      end
-    end
+for i,name in ipairs(peripheral.getNames()) do
+  local type = peripheral.getType(name)
+  if type == "monitor" then
+    print("Found monitor "..name)
+    monitor = peripheral.wrap(name)
   end
+  -- elseif type == "modem" then
+  --   print("Found modem on side "..side)
+  --   local modem = peripheral.wrap(side)
+  --   for i,name in ipairs(model.getNamesRemote()) do
+  --     local rtype = modem.getTypeRemote(name)
+  --     if rtype == "monitor" then
+  --       print("Found monitor on modem "..name)
+  --       monitor = peripheral.wrap(side)
+  --     end
+  --   end
+  -- end
 
   if monitor then
     break
