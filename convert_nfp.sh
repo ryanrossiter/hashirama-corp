@@ -1,0 +1,1 @@
+python ../computercraft-stuff/convert_nfp.py $@

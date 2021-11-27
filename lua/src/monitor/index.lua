@@ -10,10 +10,11 @@ for i,side in ipairs(SIDES) do
 end
 
 -- monitor.write( "Hello World!" )
+monitor.setTextScale(0.5)
 
 local oldterm = term.redirect(monitor)
 -- Now all term calls will go to the monitor instead
 local image = paintutils.loadImage("happy.put")
-paintutils.loadImage(image, 1, 1)
+paintutils.drawImage(image, 1, 1)
 term.redirect( oldterm )
 -- Now the term.* calls will draw on the terminal again
