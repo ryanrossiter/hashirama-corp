@@ -13,7 +13,7 @@ end
 
 local oldterm = term.redirect(monitor)
 -- Now all term calls will go to the monitor instead
-local image = paintutils.loadImage("happy.png")
+local image = paintutils.loadImage("happy.put")
 paintutils.loadImage(image, 1, 1)
 term.redirect( oldterm )
 -- Now the term.* calls will draw on the terminal again
