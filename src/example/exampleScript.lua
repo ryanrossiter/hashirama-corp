@@ -2,4 +2,4 @@ print("hello world")
 
 print("yay")
 
-turtle.attack()
+-- turtle.attack()
