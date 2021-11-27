@@ -3,7 +3,7 @@ SIDES = {"front", "back", "left", "right", "top", "bottom"}
 monitor = nil
 for i,side in ipairs(SIDES) do
   local present = peripheral.isPresent(side)
-  if present && peripheral.getType(side) == "monitor" then
+  if present and peripheral.getType(side) == "monitor" then
     print("Found monitor on side "..side)
     monitor = peripheral.wrap(side)
   end
