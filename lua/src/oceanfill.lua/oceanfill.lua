@@ -68,7 +68,10 @@ function oceanFill(x, y)
 
             -- break directly in front so we can move forward
             turtle.dig()
-            turtle.forward()
+            while turtle.forward() == false do
+                print("ERROR: Could not move, waiting 5 seconds...")
+                sleep(5)
+            end
             yy = yy + 1
         end
 
