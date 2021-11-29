@@ -125,9 +125,11 @@ end
 
 -- fills the column directly in front
 function fillCol(itemId)
-    while turtle.inspect() ~= itemId do
+    local inspect = turtle.inspect()
+    while inspect == nil or inspect.name ~= itemId do
         locateItemInInv(itemId)
         turtle.place()
+        inspect = turtle.inspect()
     end
 end
 
@@ -135,6 +137,7 @@ function oceanFill(x, y)
     print("Filling layer")
     checkFuel()
     fillCol(FILL_ITEM_ID)
+    print("Done")
 end
 
 
