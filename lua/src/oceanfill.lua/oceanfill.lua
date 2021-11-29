@@ -19,7 +19,7 @@ function checkFuel()
                     tries = 16
                 end
             end
-        until(refuelled == false)
+        until(refuelled == true)
         turtle.select(startSlot)
         print("Done refueling")
     end
