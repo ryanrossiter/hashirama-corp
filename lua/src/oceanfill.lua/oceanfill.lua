@@ -25,10 +25,10 @@ function checkFuel()
             local refuelled = turtle.refuel()
             if refuelled == false then
                 -- change slots
-                turtle.select((turtle.getSelectedSlot() + 1) % 17 + 1)
+                turtle.select((turtle.getSelectedSlot() % 16) + 1)
 
                 tries = tries - 1
-                if tries <= then
+                if tries == 0 then
                     print("ERROR: Ran out of fuel, will search again in 3 seconds")
                     sleep(3)
                     tries = 16
@@ -43,12 +43,16 @@ function locateItemInInv(itemId)
     local currentSlot = turtle.getSelectedSlot()
     local tries = 16
     
-    while turtle.getItemDetail(currentSlot) ~= itemId do
+    local currentItem = turtle.getItemDetail(currentSlot)
+    while currentItem == nil or currentItem.name ~= itemId do
+        if currentItem ~= nil then print(currentItem.name) end
         -- change slots
-        turtle.select((turtle.getSelectedSlot() + 1) % 17 + 1)
+        currentSlot = (turtle.getSelectedSlot() % 16) + 1
+        turtle.select(currentSlot)
+        currentItem = turtle.getItemDetail(currentSlot)
 
         tries = tries - 1
-        if tries <= then
+        if tries == 0 then
             print("ERROR: Failed to find item ".. itemId ..", will search again in 3 seconds")
             sleep(3)
             tries = 16
@@ -120,12 +124,12 @@ function digLayer(x, y)
 end
 
 -- fills the column directly in front
-function fillCol(itemId) {
-    while turtle.inspect() != itemId do
+function fillCol(itemId)
+    while turtle.inspect() ~= itemId do
         locateItemInInv(itemId)
         turtle.place()
     end
-}
+end
 
 function oceanFill(x, y)
     print("Filling layer")
