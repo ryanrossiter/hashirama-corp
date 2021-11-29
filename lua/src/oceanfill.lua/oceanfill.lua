@@ -1,4 +1,4 @@
-FILL_ITEM_ID="sand"
+FILL_ITEM_ID="minecraft:sand"
 
 function digLine(distance)
     print("Digging line with distance: " .. distance)
@@ -125,11 +125,11 @@ end
 
 -- fills the column directly in front
 function fillCol(itemId)
-    local inspect = turtle.inspect()
-    while inspect == nil or inspect.name ~= itemId do
+    local success, inspect = turtle.inspect()
+    while success == false or inspect.name ~= itemId do
         locateItemInInv(itemId)
         turtle.place()
-        inspect = turtle.inspect()
+        success, inspect = turtle.inspect()
     end
 end
 
