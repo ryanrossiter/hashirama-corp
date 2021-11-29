@@ -48,12 +48,11 @@ end
 
 -- fills the column directly in front
 function fillCol(itemId)
-    local success, inspect = turtle.inspect()
-    while success == false or inspect.name ~= itemId do
+    local success = false
+    repeat
         locateItemInInv(itemId)
-        turtle.place()
-        success, inspect = turtle.inspect()
-    end
+        success = turtle.place()
+    until(success == false)
 end
 
 function oceanFill(x, y)
