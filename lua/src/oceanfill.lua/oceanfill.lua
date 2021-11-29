@@ -60,6 +60,7 @@ function oceanFill(x, y)
     print("Filling w="..x.." h="..y)
     local xx, yy = 0, 0
     while xx < x do
+        yy = 0
         while yy < y do
             checkFuel()
             print("Filling column")
@@ -71,10 +72,18 @@ function oceanFill(x, y)
             turtle.forward()
             yy = yy + 1
         end
-        turtle.turnRight()
-        turtle.forward()
-        turtle.turnRight()
-        turtle.back()
+
+        if xx % 2 == 0 then
+            turtle.turnRight()
+            turtle.forward()
+            turtle.turnRight()
+            turtle.back()
+        else
+            turtle.turnLeft()
+            turtle.forward()
+            turtle.turnLeft()
+            turtle.back()
+        end
         xx = xx + 1
     end
     print("Done filling")
